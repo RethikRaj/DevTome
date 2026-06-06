@@ -47,17 +47,35 @@ const components = {
     )
   },
   block: {
-    h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-2xl font-semibold mt-6 mb-3">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-xl font-medium mt-4 mb-2">{children}</h3>,
-    p: ({ children }: any) => <p className="my-4 leading-relaxed">{children}</p>,
-    ul: ({ children }: any) => <ul className="list-disc list-inside my-4 space-y-2">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside my-4 space-y-2">{children}</ol>,
-    li: ({ children }: any) => <li>{children}</li>,
+    h1: ({ children }: any) => <h1 className="text-3xl font-bold mb-4">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="text-2xl font-bold mb-3">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-xl font-bold mb-2">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-lg font-bold mb-2">{children}</h4>,
+    h5: ({ children }: any) => <h5 className="text-base font-bold mb-2">{children}</h5>,
+    h6: ({ children }: any) => <h6 className="text-sm font-bold mb-2">{children}</h6>,
+    normal: ({ children }: any) => <p className="mb-4 leading-relaxed">{children}</p>,
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-zinc-300 dark:border-zinc-600 pl-4 my-4 italic">
+      <blockquote className="border-l-4 border-green-500 pl-4 py-1 mb-4 italic text-gray-400 bg-gray-800/50 rounded-r">
         {children}
       </blockquote>
+    )
+  },
+  list: {
+    bullet: ({ children }: any) => <ul className="list-disc ml-6 mb-4 space-y-1">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal ml-6 mb-4 space-y-1">{children}</ol>
+  },
+  listItem: {
+    bullet: ({ children }: any) => <li>{children}</li>,
+    number: ({ children }: any) => <li>{children}</li>
+  },
+  marks: {
+    strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
+    em: ({ children }: any) => <em className="italic">{children}</em>,
+    code: ({ children }: any) => <code className="bg-gray-800 px-1 rounded text-sm font-mono">{children}</code>,
+    link: ({ children, value }: any) => (
+      <a href={value.href} className="text-blue-500 underline">
+        {children}
+      </a>
     )
   }
 }

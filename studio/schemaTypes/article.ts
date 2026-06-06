@@ -52,7 +52,10 @@ export default {
               { title: 'Python', value: 'python' },
             ]
           }
-        }
+        },
+        {
+          type: 'table'
+        },
       ]
     },
     {

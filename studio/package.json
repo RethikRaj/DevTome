@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "@sanity/code-input": "^7.1.2",
+    "@sanity/table": "^2.0.1",
     "@sanity/vision": "^5.30.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

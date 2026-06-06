@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import CourseCard from '@/components/CourseCard'
 import { getCourses } from '@/services/sanityService'
@@ -38,7 +37,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <Hero />
       <section className="py-16">
         <div className="container mx-auto px-4">
