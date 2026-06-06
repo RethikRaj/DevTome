@@ -1,0 +1,11 @@
+---
+description: Core DevTome rules
+alwaysApply: true
+trigger: always_on
+---
+- Work on one active spec at a time
+- Treat the active specs/*.md file as the source of truth
+- Do not build future features, routes, pages, or schemas early
+- Prefer simple readable code over over-engineered patterns
+- If a manual setup step is needed, note it in manual-work/ and do not silently invent assumptions
+- Update context/tracker.md after completing every spec

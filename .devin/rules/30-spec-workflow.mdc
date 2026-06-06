@@ -1,0 +1,9 @@
+---
+description: Spec workflow rules
+trigger: always_on
+---
+- Always read the active spec fully before writing any code
+- Implement only what the spec asks
+- Do not refactor unrelated files
+- Run verification steps from the spec before marking done
+- Update tracker.md after every spec

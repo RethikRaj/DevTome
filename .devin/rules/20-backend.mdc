@@ -1,0 +1,10 @@
+---
+description: Backend rules for DevTome
+trigger: always_on
+---
+- Stack: Express, TypeScript, PostgreSQL
+- All DB access goes through src/repository/ only
+- Routes go in src/routes/
+- Middleware goes in src/middleware/
+- Keep controllers thin, logic in repositories
+- Use clean service layer pattern so Firebase can be swapped for own DB later

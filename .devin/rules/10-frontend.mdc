@@ -1,0 +1,11 @@
+---
+description: Frontend rules for DevTome
+trigger: always_on
+---
+- Stack: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
+- Dark mode default, light mode toggle via next-themes
+- Use React Router for client-side navigation
+- Rich text editor: TipTap
+- All API calls go through src/lib/client.ts only
+- Never call backend directly from page components
+- Keep components small and focused
