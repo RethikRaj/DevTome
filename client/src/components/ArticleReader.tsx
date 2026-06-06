@@ -44,7 +44,27 @@ const components = {
           {value.code}
         </SyntaxHighlighter>
       </div>
-    )
+    ),
+    table: ({ value }: any) => {
+      if (!value || !value.rows) return null
+      return (
+        <div className="overflow-x-auto mb-6">
+          <table className="w-full border-collapse border border-gray-700">
+            <tbody>
+              {value.rows.map((row: any, rowIndex: number) => (
+                <tr key={rowIndex} className={rowIndex === 0 ? 'bg-gray-800 font-bold' : 'border-t border-gray-700'}>
+                  {row.cells.map((cell: string, cellIndex: number) => (
+                    rowIndex === 0
+                      ? <th key={cellIndex} className="border border-gray-700 px-4 py-2 text-left text-green-400">{cell}</th>
+                      : <td key={cellIndex} className="border border-gray-700 px-4 py-2">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
   },
   block: {
     h1: ({ children }: any) => <h1 className="text-3xl font-bold mb-4">{children}</h1>,
