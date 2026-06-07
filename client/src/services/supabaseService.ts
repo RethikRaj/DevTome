@@ -57,51 +57,49 @@ export async function getProgress(userId: string): Promise<Progress[]> {
 }
 
 export async function updateStreak(userId: string) {
-  const { data: existingStreak } = await supabase
+  const today = new Date().toISOString().split('T')[0]
+  
+  // First try to get existing streak
+  const { data: existing } = await supabase
     .from('streaks')
     .select('*')
     .eq('user_id', userId)
     .single()
 
-  const today = new Date().toISOString().split('T')[0]
-  const lastVisit = existingStreak?.last_visit ? new Date(existingStreak.last_visit).toISOString().split('T')[0] : null
-
-  let currentStreak = existingStreak?.current_streak || 0
-  let longestStreak = existingStreak?.longest_streak || 0
-
-  if (lastVisit === today) {
-    // Already visited today, no change
-    return { data: existingStreak, error: null }
+  if (!existing) {
+    // First time - create new streak
+    await supabase.from('streaks').insert({
+      user_id: userId,
+      last_visit: today,
+      current_streak: 1,
+      longest_streak: 1
+    })
+    return
   }
 
+  const lastVisit = existing.last_visit
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
   const yesterdayStr = yesterday.toISOString().split('T')[0]
 
-  if (lastVisit === yesterdayStr) {
-    // Consecutive day, increment streak
-    currentStreak += 1
-  } else if (lastVisit !== today) {
-    // Streak broken or first visit
-    currentStreak = 1
+  let newStreak = existing.current_streak
+
+  if (lastVisit === today) {
+    // Already visited today, do nothing
+    return
+  } else if (lastVisit === yesterdayStr) {
+    // Visited yesterday, increment streak
+    newStreak = existing.current_streak + 1
+  } else {
+    // Missed a day, reset streak
+    newStreak = 1
   }
 
-  if (currentStreak > longestStreak) {
-    longestStreak = currentStreak
-  }
-
-  const { data, error } = await supabase
-    .from('streaks')
-    .upsert({
-      user_id: userId,
-      last_visit: new Date().toISOString(),
-      current_streak: currentStreak,
-      longest_streak: longestStreak,
-    }, {
-      onConflict: 'user_id'
-    })
-
-  return { data, error }
+  await supabase.from('streaks').update({
+    last_visit: today,
+    current_streak: newStreak,
+    longest_streak: Math.max(newStreak, existing.longest_streak)
+  }).eq('user_id', userId)
 }
 
 export async function getStreak(userId: string): Promise<Streak | null> {
